@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { Stack, Box, Text, Tag, TagLabel } from '@chakra-ui/react';
+import { Stack, Box, Text, Tag, TagLabel, Button } from '@chakra-ui/react';
 import { userContext } from '../../contexts/User/UserContext';
 import coinIcon from '../../assets/icons/coin.svg';
 import IconComp from '../IconComp';
 import PropTypes from 'prop-types';
+import AddCoinsButton from './AddCoinsButton';
 const MenuItems: FunctionComponent<{ isOpen: any }> = ({ isOpen }) => {
   return (
     <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }} flexBasis={{ base: '100%', md: 'auto' }}>
@@ -14,6 +15,7 @@ const MenuItems: FunctionComponent<{ isOpen: any }> = ({ isOpen }) => {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
+        <AddCoinsButton />
         <userContext.Consumer>
           {value => (
             <>
@@ -24,7 +26,7 @@ const MenuItems: FunctionComponent<{ isOpen: any }> = ({ isOpen }) => {
                 size='lg'
                 borderRadius='full'
                 variant='solid'
-                color='grey.500'
+                bgColor='gray.500'
                 textColor='gray.700'
                 fontSize='xl'
                 marginInlineStart='2px'
