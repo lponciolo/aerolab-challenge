@@ -81,6 +81,12 @@ or
 npm run build
 ```
 
+## TODO
+
+Add Coins Button in Header
+Implement reedem History
+Add Modal to assure buy intention
+
 ## Author
 
 👤 **Leonardo Ponciolo**
