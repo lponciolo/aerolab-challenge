@@ -1,7 +1,10 @@
 import React, { useEffect, useState, FunctionComponent } from 'react';
 import { Skeleton } from '@chakra-ui/react';
 
-const imgComp: FunctionComponent<{ src: string }> = ({ src, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+const imgComp: FunctionComponent<{ zIndex?: number; src: string; position?: string }> = ({
+  src,
+  ...props
+}: React.ImgHTMLAttributes<HTMLImageElement>) => {
   const [imgSrc, setSrc] = useState(undefined || src);
   useEffect(() => {
     const img = new Image();
@@ -10,7 +13,7 @@ const imgComp: FunctionComponent<{ src: string }> = ({ src, ...props }: React.Im
       setSrc(src);
     });
   }, [src]);
-  return <>{imgSrc ? <img {...props} src={imgSrc} alt='ProdImg' /> : <Skeleton height='20px' />}</>;
+  return <>{imgSrc ? <img {...props} src={imgSrc} alt='ProdImg' /> : <Skeleton {...props} height='20px' />}</>;
 };
 
 export default imgComp;
