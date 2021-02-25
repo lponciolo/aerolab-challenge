@@ -5,6 +5,7 @@ import coinIcon from '../../assets/icons/coin.svg';
 import IconComp from '../IconComp';
 import PropTypes from 'prop-types';
 import AddCoinsButton from './AddCoinsButton';
+import { Link } from 'react-router-dom';
 const MenuItems: FunctionComponent<{ isOpen: any }> = ({ isOpen }) => {
   return (
     <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }} flexBasis={{ base: '100%', md: 'auto' }}>
@@ -15,7 +16,6 @@ const MenuItems: FunctionComponent<{ isOpen: any }> = ({ isOpen }) => {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <AddCoinsButton />
         <userContext.Consumer>
           {value => (
             <>
@@ -37,6 +37,12 @@ const MenuItems: FunctionComponent<{ isOpen: any }> = ({ isOpen }) => {
             </>
           )}
         </userContext.Consumer>
+        <Link to='/history'>
+          <Button color='grey.500' textColor='gray.700'>
+            Redeem History
+          </Button>
+        </Link>
+        <AddCoinsButton />
       </Stack>
     </Box>
   );
