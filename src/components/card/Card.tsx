@@ -1,10 +1,10 @@
-import { Box, Divider } from '@chakra-ui/react';
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { Tag, TagLabel } from '@chakra-ui/react';
+import { Tag, TagLabel, useDisclosure, Box, Divider } from '@chakra-ui/react';
 import buyIconBlue from '../../assets/icons/buy-blue.svg';
 import coinIcon from '../../assets/icons/coin.svg';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReedemLayer from './ReedemLayer';
+import ConfirmationModal from './ConfirmationModal';
 import ImageComp from '../ImageComp';
 import IconComp from '../IconComp';
 import axiosAPI from '../../utils/api';
@@ -23,6 +23,8 @@ const Card: FunctionComponent<{
   const [buttonMessage, setButtonMessage] = useState('reedem text');
   const [buttonDisable, setButtonDisable] = useState(false);
   const [animationOpen, setAnimationOpen] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const buyHandler = async () => {
     setButtonMessage('spinner');
     setButtonDisable(true);
@@ -105,7 +107,7 @@ const Card: FunctionComponent<{
             {canReedem && mouseOver && (
               <ReedemLayer
                 buttonDisable={buttonDisable}
-                buyHandler={buyHandler}
+                buyHandler={onOpen}
                 buttonMessage={buttonMessage}
                 cost={product.cost}
                 isVisible={mouseOver}
@@ -114,6 +116,7 @@ const Card: FunctionComponent<{
           </Box>
         </>
       </motion.div>
+      <ConfirmationModal isOpen={isOpen} onClose={onClose} actionFunction={buyHandler} />
     </AnimatePresence>
   );
 };

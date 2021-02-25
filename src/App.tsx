@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ChakraProvider, Container } from '@chakra-ui/react';
-import NavBar from './components/header/NavBar';
+import { ChakraProvider } from '@chakra-ui/react';
 import theme from './assets/theme';
 import { Global } from '@emotion/react';
-import Banner from './components/banner/Banner';
-import ResultsLayout from './components/results/ResultsLayout';
 import fontFace from './assets/fonts/font-face';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { cleanup } from '@testing-library/react';
 import axiosAPI from './utils/api';
 import { userContext } from './contexts/User/UserContext';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import HistoryPage from './pages/HistoryPage';
 
 const App: React.FunctionComponent = () => {
   const [user, setUser] = useState({
@@ -44,11 +43,14 @@ const App: React.FunctionComponent = () => {
       <userContext.Provider value={{ user: user, coinFunction: setUserCoins }}>
         <ChakraProvider theme={theme}>
           <Global styles={fontFace} />
-          <Container maxW='7xl' centerContent>
-            <NavBar />
-            <Banner pb={8} />
-            <ResultsLayout />
-          </Container>
+          <Switch>
+            <Route path='/history'>
+              <HistoryPage />
+            </Route>
+            <Route path='/'>
+              <HomePage />
+            </Route>
+          </Switch>
         </ChakraProvider>
       </userContext.Provider>
     </Router>
