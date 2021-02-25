@@ -25,14 +25,15 @@ const ResultsLayout: FunctionComponent = props => {
       try {
         const response = await axiosAPI.get('/products');
         allProducts.current = response.data.length;
-        const newResponse = response.data.slice(firstProduct, finalProduct);
+        let sortedProducts = response.data;
+        if (sort === 'lowest') sortedProducts = lowestFirst(sortedProducts);
+        if (sort === 'highest') sortedProducts = highestFirst(sortedProducts);
+        if (sort === 'default') sortedProducts = defaultSort(sortedProducts);
+        const newResponse = sortedProducts.slice(firstProduct, finalProduct);
         amountProducts.current = newResponse.length;
         productIndex.current = (page - 1) * 16 + amountProducts.current;
-        let sortedProducts = newResponse;
-        if (sort === 'lowest') sortedProducts = lowestFirst(newResponse);
-        if (sort === 'highest') sortedProducts = highestFirst(newResponse);
-        if (sort === 'default') sortedProducts = defaultSort(newResponse);
-        setProducts(sortedProducts);
+        setProducts(newResponse);
+
         console.log('👉 Returned data:', response);
       } catch (e) {
         console.log(`😱 Axios request failed: ${e}`);

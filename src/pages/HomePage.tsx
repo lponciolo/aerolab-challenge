@@ -37,7 +37,7 @@ const HomePage: React.FunctionComponent = () => {
   return (
     <Container maxW='7xl' centerContent>
       <NavBar />
-      <Banner pb={8} />
+      <Banner />
       <ResultsLayout />
     </Container>
   );
